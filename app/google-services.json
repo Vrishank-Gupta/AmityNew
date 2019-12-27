@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "505333582085",
+    "firebase_url": "https://amitynew-dace2.firebaseio.com",
+    "project_id": "amitynew-dace2",
+    "storage_bucket": "amitynew-dace2.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:505333582085:android:6be838f020181ceefe0f6c",
+        "android_client_info": {
+          "package_name": "com.example.amitynew"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "505333582085-tt03lb2l9hcnlpv2r37uh2ugd4nrdhbj.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.amitynew",
+            "certificate_hash": "3ecfa08aa5f241c099ca7496197e671537f00323"
+          }
+        },
+        {
+          "client_id": "505333582085-1lj7hu7alnug0ctg2du5jh3aa2rouka1.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCCYLih6SLWheC6z-tTeN0EbIwdGG72e4w"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "505333582085-1lj7hu7alnug0ctg2du5jh3aa2rouka1.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
