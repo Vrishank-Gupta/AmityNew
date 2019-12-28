@@ -21,6 +21,10 @@ import com.google.firebase.storage.OnProgressListener;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 
+import java.io.File;
+import java.io.IOException;
+import java.net.MalformedURLException;
+import java.net.URLConnection;
 import java.util.UUID;
 
 
@@ -30,7 +34,7 @@ public class MainActivity extends AppCompatActivity {
 
     TextView tvPath,tvType;
     private Uri filePath;
-    Button btnSelect, btnUpload;
+    Button btnSelect, btnUpload,btnShare;
     final int FILE_SELECT_CODE= 1;
     FirebaseStorage storage;
     private StorageReference storageReference;
@@ -94,6 +98,7 @@ public class MainActivity extends AppCompatActivity {
         tvType = findViewById(R.id.tvType);
         btnSelect= findViewById(R.id.btnSelect);
         btnUpload  = findViewById(R.id.btnUpload);
+        btnShare = findViewById(R.id.btnShare);
         btnSelect.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -109,15 +114,50 @@ public class MainActivity extends AppCompatActivity {
 
                 else if(getMimeType(filePath.toString()).equals("application/x-msdos-program"))
                 {
-                    uploadFile();
+//                    uploadFile();
+                    try{
+                        File file = new File(filePath.toString());
+                        URLConnection connection = file.toURL().openConnection();
+                        String mimeType = connection.getContentType();
+                        Log.d("TAG", "getMimeType: "+mimeType + "\n" + filePath);
+
+                    } catch (MalformedURLException e) {
+                        Log.d("TAG", "getMimeType: ");
+                        e.printStackTrace();
+                    } catch (IOException e) {
+                        Log.d("TAG", "getMimeType: ");
+                        e.printStackTrace();
+                    }
                 }
 
                 else
                     Toast.makeText(MainActivity.this, "Not an exe file", Toast.LENGTH_SHORT).show();
-//                uploadFile();
             }
 
         });
+
+        btnShare.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                if(filePath.equals(""))
+                    Toast.makeText(MainActivity.this, "Select a file first", Toast.LENGTH_SHORT).show();
+
+                else if(getMimeType(filePath.toString()).equals("application/x-msdos-program"))
+                {
+                    Intent sharingIntent = new Intent(Intent.ACTION_SEND);
+                    Uri screenshotUri = filePath;
+                    sharingIntent.setType("*/*");
+                    sharingIntent.putExtra(Intent.EXTRA_STREAM, screenshotUri);
+                    startActivity(Intent.createChooser(sharingIntent, "Share file using"));
+                }
+
+                else
+                    Toast.makeText(MainActivity.this, "Not an exe file", Toast.LENGTH_SHORT).show();
+
+            }
+        });
+
     }
 
     @Override

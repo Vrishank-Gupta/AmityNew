@@ -46,4 +46,12 @@
         android:id="@+id/btnUpload"
         android:gravity="center"/>
 
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:text="Share"
+        android:id="@+id/btnShare"
+        android:gravity="center"/>
+
 </LinearLayout>
