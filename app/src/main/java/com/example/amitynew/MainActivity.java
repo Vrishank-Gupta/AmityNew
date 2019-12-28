@@ -121,6 +121,7 @@ public class MainActivity extends AppCompatActivity {
                         String temp = getStringFromFile(FileUtils.getPath(MainActivity.this, filePath));
                        if(temp.charAt(0) == 'M' && temp.charAt(1) == 'Z')
                        {
+
 //                           uploadFile();
                            Toast.makeText(MainActivity.this, "This is exe file", Toast.LENGTH_SHORT).show();
 
@@ -143,20 +144,35 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                if(filePath==null)
+                if(filePath == null)
                     Toast.makeText(MainActivity.this, "Select a file first", Toast.LENGTH_SHORT).show();
 
-                else if(getMimeType(filePath.toString()).equals("application/x-msdos-program"))
-                {
-                    Intent sharingIntent = new Intent(Intent.ACTION_SEND);
-                    Uri screenshotUri = filePath;
-                    sharingIntent.setType("*/*");
-                    sharingIntent.putExtra(Intent.EXTRA_STREAM, screenshotUri);
-                    startActivity(Intent.createChooser(sharingIntent, "Share file using"));
-                }
+                else {
+                    try {
 
-                else
-                    Toast.makeText(MainActivity.this, "Not an exe file", Toast.LENGTH_SHORT).show();
+                        String temp = getStringFromFile(FileUtils.getPath(MainActivity.this, filePath));
+                        if(temp.charAt(0) == 'M' && temp.charAt(1) == 'Z')
+                        {
+
+                            Intent sharingIntent = new Intent(Intent.ACTION_SEND);
+                            Uri screenshotUri = filePath;
+                            sharingIntent.setType("*/*");
+                            sharingIntent.putExtra(Intent.EXTRA_STREAM, screenshotUri);
+                            startActivity(Intent.createChooser(sharingIntent, "Share file using"));
+
+                            Toast.makeText(MainActivity.this, "This is exe file", Toast.LENGTH_SHORT).show();
+
+                        }
+
+                        else
+                            Toast.makeText(MainActivity.this, "Not an exe file", Toast.LENGTH_SHORT).show();
+
+
+                    }catch (IOException e) {
+                        e.printStackTrace();
+                        Log.d("TAG", "getMimeType: "+e);
+                    }
+                }
 
             }
         });
@@ -253,3 +269,5 @@ public class MainActivity extends AppCompatActivity {
 
 
 }
+
+
